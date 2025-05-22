@@ -1,176 +1,176 @@
 # Tele-Vid-Bot-Archive
 
-ربات تلگرام برای مدیریت لینک‌های ویدئو و فایل‌های ویدئویی سازمان‌دهی شده بر اساس دسته‌بندی‌ها. ساخته شده با Telethon و SQLite.
+A Telegram bot for managing video links and video files organized by categories. Built with Telethon and SQLite.
 
-## 🌟 قابلیت‌ها
+## 🌟 Features
 
-- **📁 دسته‌بندی‌ها**: سازماندهی ویدئوها در دسته‌بندی‌های سفارشی
-- **🎬 مدیریت ویدئو**: اضافه کردن، حذف و مرور ویدئوها
-- **🔒 کنترل دسترسی**: دسترسی ادمین و دسترسی موقت مبتنی بر رمز عبور برای کاربران
-- **📱 رابط کاربری بصری**: رابط کاربری تمیز با دکمه‌های درون‌خطی برای ناوبری
-- **🗃 ذخیره‌سازی هوشمند**: ذخیره فایل‌های ویدئویی به صورت محلی یا ذخیره لینک‌های ویدئو
-- **🖼 تولید تصویر بندانگشتی**: تولید خودکار تصاویر بندانگشتی برای فایل‌های ویدئویی
-- **🔍 تشخیص پلتفرم**: پشتیبانی از پلتفرم‌های مختلف ویدئویی مانند یوتیوب و پورن‌هاب
-- **🌐 پردازش URL**: استخراج اطلاعات از URL‌ها و تشخیص نوع و شناسه ویدئو
+- **📁 Categories**: Organize videos into custom categories
+- **🎬 Video Management**: Add, delete, and browse videos
+- **🔒 Access Control**: Admin access and password-based temporary access for users
+- **📱 Visual UI**: Clean interface with inline buttons for navigation
+- **🗃 Smart Storage**: Store video files locally or save video links
+- **🖼 Thumbnail Generation**: Automatically generate thumbnails for video files
+- **🔍 Platform Detection**: Support for various video platforms like YouTube and Pornhub
+- **🌐 URL Processing**: Extract information from URLs and detect video types and IDs
 
-## 📋 نیازمندی‌ها
+## 📋 Requirements
 
 - Python 3.6+
-- وابستگی‌های فهرست شده در `requirements.txt`
-- برای اجرا با داکر: Docker و Docker Compose
+- Dependencies listed in `requirements.txt`
+- For Docker deployment: Docker and Docker Compose
 
-## 🚀 نصب و راه‌اندازی
+## 🚀 Installation and Setup
 
-### روش ۱: نصب مستقیم
+### Method 1: Direct Installation
 
-1. **کلون کردن مخزن:**
+1. **Clone the repository:**
    ```
    git clone https://github.com/yourusername/Tele-Vid-Bot-Archive.git
    cd Tele-Vid-Bot-Archive
    ```
 
-2. **اجرای اسکریپت راه‌اندازی:**
+2. **Run the setup script:**
    ```
    chmod +x setup.sh
    ./setup.sh
    ```
 
-3. **ویرایش فایل `.env` با اطلاعات خود:**
-   - دریافت `API_ID` و `API_HASH` از [my.telegram.org/apps](https://my.telegram.org/apps)
-   - ایجاد ربات و دریافت `BOT_TOKEN` از [@BotFather](https://t.me/BotFather)
-   - تنظیم شناسه تلگرام خود به عنوان `ADMIN_ID` (می‌توانید از [@userinfobot](https://t.me/userinfobot) آن را دریافت کنید)
-   - تنظیم یک `ACCESS_PASSWORD` برای دسترسی موقت
+3. **Edit the `.env` file with your credentials:**
+   - Get `API_ID` and `API_HASH` from [my.telegram.org/apps](https://my.telegram.org/apps)
+   - Create a bot and get `BOT_TOKEN` from [@BotFather](https://t.me/BotFather)
+   - Set your Telegram user ID as `ADMIN_ID` (you can get it from [@userinfobot](https://t.me/userinfobot))
+   - Set an `ACCESS_PASSWORD` for temporary access
 
-4. **اجرای ربات:**
+4. **Run the bot:**
    ```
    python main.py
    ```
 
-### روش ۲: نصب با داکر
+### Method 2: Docker Installation
 
-1. **کلون کردن مخزن:**
+1. **Clone the repository:**
    ```
    git clone https://github.com/yourusername/Tele-Vid-Bot-Archive.git
    cd Tele-Vid-Bot-Archive
    ```
 
-2. **اجرای اسکریپت راه‌اندازی داکر:**
+2. **Run the Docker setup script:**
    ```
    chmod +x docker-setup.sh
    ./docker-setup.sh
    ```
 
-3. **ویرایش فایل `.env` با اطلاعات خود.**
+3. **Edit the `.env` file with your credentials.**
 
-4. **راه‌اندازی مجدد با تنظیمات جدید:**
+4. **Restart with new settings:**
    ```
    docker-compose up -d
    ```
 
-5. **مشاهده لاگ‌ها:**
+5. **View logs:**
    ```
    docker-compose logs -f
    ```
 
-## 📊 ساختار پایگاه داده
+## 📊 Database Structure
 
-ربات از SQLite با جداول زیر استفاده می‌کند:
+The bot uses SQLite with the following tables:
 
-- **users**: برای کنترل دسترسی
-  - `id`: شناسه تلگرام کاربر
-  - `username`: نام کاربری تلگرام کاربر
-  - `access_until`: زمان انقضای دسترسی
+- **users**: For access control
+  - `id`: User's Telegram ID
+  - `username`: User's Telegram username
+  - `access_until`: Access expiration timestamp
 
-- **categories**: برای سازماندهی ویدئوها
-  - `id`: شناسه خودکار افزایشی
-  - `name`: نام دسته‌بندی
+- **categories**: For organizing videos
+  - `id`: Auto-incremented ID
+  - `name`: Category name
 
-- **videos**: برای ذخیره اطلاعات ویدئو
-  - `id`: شناسه خودکار افزایشی
-  - `title`: عنوان ویدئو
-  - `type`: یا 'file' یا 'link'
-  - `path_or_url`: مسیر فایل یا URL
-  - `category_id`: کلید خارجی به دسته‌بندی‌ها
-  - `thumbnail_path`: مسیر به تصویر بندانگشتی
-  - `platform`: پلتفرم ویدئو (مانند youtube یا pornhub)
-  - `video_id`: شناسه ویدئو در پلتفرم اصلی
+- **videos**: For storing video information
+  - `id`: Auto-incremented ID
+  - `title`: Video title
+  - `type`: Either 'file' or 'link'
+  - `path_or_url`: File path or URL
+  - `category_id`: Foreign key to categories
+  - `thumbnail_path`: Path to thumbnail image
+  - `platform`: Video platform (like youtube or pornhub)
+  - `video_id`: Video ID on the original platform
 
-## 📱 استفاده
+## 📱 Usage
 
-1. **شروع ربات**: ارسال `/start` به ربات
-   - اگر شما ادمین هستید، به طور خودکار دسترسی خواهید داشت
-   - در غیر این صورت، باید رمز عبور دسترسی را وارد کنید
+1. **Start the bot**: Send `/start` to the bot
+   - If you're the admin, you'll get immediate access
+   - If not, you'll need to enter the access password
 
-2. **منوی اصلی**:
-   - 📁 دسته‌بندی‌ها: مرور ویدئوها بر اساس دسته‌بندی
-   - 🎬 مدیریت ویدئوها: اضافه یا حذف ویدئوها
-   - 🗂 مدیریت دسته‌بندی‌ها: اضافه یا حذف دسته‌بندی‌ها
+2. **Main Menu**:
+   - 📁 Categories: Browse videos by category
+   - 🎬 Manage Videos: Add or delete videos
+   - 🗂 Manage Categories: Add or delete categories
 
-3. **افزودن ویدئوها**:
-   - وارد کردن عنوان ویدئو
-   - آپلود فایل ویدئو یا چسباندن لینک ویدئو
-   - انتخاب دسته‌بندی
+3. **Adding Videos**:
+   - Enter video title
+   - Upload video file or paste video link
+   - Select the category
 
-## 🧱 ساختار پروژه
+## 🧱 Project Structure
 
 ```
 /Tele-Vid-Bot-Archive
-├── main.py                     # نقطه ورود
-├── config.py                   # بارگذاری تنظیمات
-├── .env                        # متغیرهای محیطی
-├── .env.example                # نمونه متغیرهای محیطی
-├── requirements.txt            # وابستگی‌ها
-├── Dockerfile                  # تنظیمات داکر
-├── docker-compose.yml          # تنظیمات داکر کامپوز
-├── setup.sh                    # اسکریپت راه‌اندازی
-├── docker-setup.sh             # اسکریپت راه‌اندازی داکر
-├── DATA/                       # ذخیره‌سازی ویدئو
-│   ├── videos/                 # فایل‌های ویدئویی
-│   └── thumbnails/             # تصاویر بندانگشتی
+├── main.py                     # Entry point
+├── config.py                   # Configuration loader
+├── .env                        # Environment variables
+├── .env.example                # Example environment variables
+├── requirements.txt            # Dependencies
+├── Dockerfile                  # Docker configuration
+├── docker-compose.yml          # Docker Compose configuration
+├── setup.sh                    # Setup script
+├── docker-setup.sh             # Docker setup script
+├── DATA/                       # Video storage
+│   ├── videos/                 # Video files
+│   └── thumbnails/             # Thumbnail images
 ├── database/
 │   ├── __init__.py
-│   └── database.py             # عملیات پایگاه داده
+│   └── database.py             # Database operations
 ├── handlers/
 │   ├── __init__.py
-│   ├── auth_handler.py         # احراز هویت
-│   ├── category_handler.py     # مدیریت دسته‌بندی
-│   └── video_handler.py        # مدیریت ویدئو
+│   ├── auth_handler.py         # Authentication
+│   ├── category_handler.py     # Category management
+│   └── video_handler.py        # Video management
 ├── utils/
 │   ├── __init__.py
-│   └── media_utils.py          # ابزارهای پردازش رسانه
+│   └── media_utils.py          # Media handling utilities
 └── tests/
-    ├── data/                   # داده‌های تست
-    │   ├── thumbnails/         # تصاویر بندانگشتی آزمایشی
-    │   └── url_tests/          # نتایج آزمون URL‌ها
-    ├── url_thumbnail_tester.py # آزمونگر تصاویر بندانگشتی URL
-    ├── simple_url_tester.py    # آزمونگر ساده URL
-    ├── convert_ppm_to_jpg.py   # تبدیل PPM به JPG
-    ├── generate_sample_thumbnails.py # تولید تصاویر بندانگشتی نمونه
-    └── README_thumbnails.md    # مستندات ابزارهای تصویر بندانگشتی
+    ├── data/                   # Test data
+    │   ├── thumbnails/         # Test thumbnails
+    │   └── url_tests/          # URL test results
+    ├── url_thumbnail_tester.py # URL thumbnail tester
+    ├── simple_url_tester.py    # Simple URL tester
+    ├── convert_ppm_to_jpg.py   # PPM to JPG converter
+    ├── generate_sample_thumbnails.py # Sample thumbnail generator
+    └── README_thumbnails.md    # Thumbnail tools documentation
 ```
 
-## 🐳 دستورات داکر
+## 🐳 Docker Commands
 
-- **ساخت و اجرا:**
+- **Build and run:**
   ```
   docker-compose up -d
   ```
 
-- **مشاهده لاگ‌ها:**
+- **View logs:**
   ```
   docker-compose logs -f
   ```
 
-- **توقف:**
+- **Stop:**
   ```
   docker-compose down
   ```
 
-- **بازسازی:**
+- **Rebuild:**
   ```
   docker-compose up -d --build
   ```
 
-## �� مجوز
+## 📜 License
 
 MIT License
