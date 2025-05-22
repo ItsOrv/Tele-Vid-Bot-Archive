@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./DATA:/app/DATA
+      - ./database:/app/database
+    env_file:
+      - .env
+    environment:
+      - TZ=Asia/Tehran
+    networks:
+      - bot-network
+
+networks:
+  bot-network:
+    driver: bridge 

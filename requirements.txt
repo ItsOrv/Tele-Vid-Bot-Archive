@@ -1,0 +1,5 @@
+telethon==1.28.5
+python-dotenv==1.0.0
+numpy<2.0.0
+opencv-python==4.7.0.72
+Pillow==9.5.0 

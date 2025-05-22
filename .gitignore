@@ -172,3 +172,11 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Project specific files
+*.session
+*.session-journal
+database/video_archive.db
+DATA/
+tests/data/
+tests/output/
